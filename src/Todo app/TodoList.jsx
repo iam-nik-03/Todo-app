@@ -21,6 +21,16 @@ let [todos, setTodos] = useState([{task:"Sample task", id :uuidv4() }]);
         setTodos(todos.filter((todo) => todo.id != id));
         
     }
+    let upperCaseAll = () => {
+        setTodos((prevTodos)=>
+            prevTodos.map((todo) => {
+                return {
+                    ...todo,
+                    task: todo.task.toUpperCase(),
+                };
+            })
+        )
+    };
     return (
         <div>
            <input type="text" placeholder="Add a Task" value={newTodo}  onChange={updateTodoValue}/>
@@ -39,6 +49,8 @@ let [todos, setTodos] = useState([{task:"Sample task", id :uuidv4() }]);
                  ))
                }
             </ul>
+            <br /><br />
+            <button onClick={upperCaseAll}> UpperCase All</button>
         </div>
     )
 }
