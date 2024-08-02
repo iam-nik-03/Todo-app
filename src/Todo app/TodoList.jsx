@@ -9,18 +9,18 @@ let [todos, setTodos] = useState([{task:"Sample task", id :uuidv4() }]);
 
     let addNewTask = () => {
         setTodos((prevTodos) => {
-           return [...prevTodos, { task: newTodo, id: uuidv4() }];
+            return [...prevTodos, { task: newTodo, id: uuidv4() }];
         });
         setNewTodo("");
-    }
+    };
     let updateTodoValue = (event) => {
         setNewTodo(event.target.value);
         
-    }
+    };
     let deleteTodo = (id) => {
         setTodos(todos.filter((todo) => todo.id != id));
         
-    }
+    };
     let upperCaseAll = () => {
         setTodos((prevTodos)=>
             prevTodos.map((todo) => {
@@ -30,6 +30,21 @@ let [todos, setTodos] = useState([{task:"Sample task", id :uuidv4() }]);
                 };
             })
         )
+    };
+    let upperCaseOne = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) => {
+                if (todo.id ==id) {
+                    return {
+                        ...todo,
+                        task: todo.task.toUpperCase(),
+                    };
+                } else {
+                    return todo;
+                }
+                    
+            })
+        );
     };
     return (
         <div>
@@ -45,6 +60,7 @@ let [todos, setTodos] = useState([{task:"Sample task", id :uuidv4() }]);
                          <span> {todo.task}</span>
                          &nbsp;&nbsp;&nbsp;&nbsp;
                     <button onClick={()=>deleteTodo(todo.id)}> Delete</button>
+                    <button onClick={()=>upperCaseOne(todo.id)}> UpperCase one</button>
                      </li>
                  ))
                }
